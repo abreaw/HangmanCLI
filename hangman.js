@@ -10,6 +10,13 @@
 // -----------------------------------------------------------------------------------
 
 
+// Known issues that need to be resolved 
+// -----------------------------------------------------------------------------------
+// input from user takes more than just a single character ... need to resolve this still
+// -----------------------------------------------------------------------------------
+
+
+
 // Load the NPM Package inquirer & fs
 var inquirer = require("inquirer");  // allow command line prompts to use
 var fs = require("fs");  // allow file reads for words to be used for the hangman game & writes for scores to be recorded (if we get that far)
@@ -100,7 +107,7 @@ function getNewWord() {
 
 	// Left this in here to make it easier to test ... if you scroll up in the console window on the first run through you will see the current word
 	currentWord.showCurrentWord();
-	
+
 	currentWord.createWordGameView();
 	checkContinue();
 

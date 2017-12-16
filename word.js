@@ -13,12 +13,6 @@ function Word(currentWord, numGuessesTotal) {
 	this.guessView = [];
 	this.letterGuessedCount = 0;
 
-	// this.guessedArray = [];  // holds the letters that have been guessed
-	// this.numGuessesTotal = numGuessesTotal;
-	// this.currNumGuesses = 0;  // start guess count at zero
-
-	this.numLetters = this.currentWord.length;
-
 	this.showCurrentWord = function() {
 
 		console.log("---------------------------------------------");
@@ -29,7 +23,7 @@ function Word(currentWord, numGuessesTotal) {
 	this.showUserViewWord = function() {
 
 		// get # of spacess that will be displayed to put the user view of the word in the middle of the lines
-		// 45 (# of lines above and below word) minus word length * 2 (because of the spaces between the dashes) / 2 (to get the left side spaces that should be remaining)
+		// 45 (# of lines above and below word) minus word length * 2 (because of the spaces between the dashes) / 2 (to get the left side spaces that should be remaining) ... -4 (because it still didn't look right!!)
 		var loopIndex = Math.floor((45 - (this.currentWord.length)) / 2) - 4;
 
 		var spaceArray = [];
@@ -62,15 +56,6 @@ function Word(currentWord, numGuessesTotal) {
 		// console.log(this.guessView);
 	};
 
-	this.addLetter = function(currLetter) {
-
-		this.guessedArray.push(currLetter);
-
-		console.log("guessed letter: ");
-		console.log(this.guessedArray);
-
-	};  // end of addLetter function
-
 	this.checkLetter = function(currLetter) {
 
 		var isInWord = false;
@@ -96,6 +81,7 @@ function Word(currentWord, numGuessesTotal) {
 	};   // end of checkLetter function
 	
 }  // end of Word object constructor
+
 
 // export the Word constructor to be used within hangman app
 module.exports = Word;

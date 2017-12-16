@@ -1,13 +1,13 @@
 
-
+// Game Logic for Hangman Node.js app
+// -----------------------------------------------------------------------------------
 // get new word for user to guess
 // setup word w/ dashes for user to see blanks
 // allow user to input a letter for guessing
 // loop through user input until word guessed or number of guess equal zero
 // if user guesses word or guesses equal zero then ask if user wants to play again
 // if so then loop through game play steps again
-// 
-
+// -----------------------------------------------------------------------------------
 
 
 // Load the NPM Package inquirer & fs
@@ -30,7 +30,7 @@ var wrongLettersArray = [];
 var wordGuessed = false;
 
 getUserName();
-// startGamePlay();
+
 
 // -----------------------------------------------------------------------------------
 // ask user name / store it in a variable and start game play
@@ -98,7 +98,9 @@ function getNewWord() {
 	// make the new word into a word object (w/ letter objects that comprise it??)
 	currentWord = new Word(currentWordGuess, totalGuessesAllowed);
 
+	// Left this in here to make it easier to test ... if you scroll up in the console window on the first run through you will see the current word
 	currentWord.showCurrentWord();
+	
 	currentWord.createWordGameView();
 	checkContinue();
 
@@ -154,12 +156,6 @@ function promptUserGuess() {
 	  	currentLetterGuessed = inquirerResponse.currGuess.toLowerCase();
 	  	var letterAlreadyGuessed = false;
 
-	 //    var isCorrect = currentWord.checkLetter(currentLetterGuessed);
-
-		// if (!isCorrect) {
-		// 	wrongLettersArray.push(currentLetterGuessed);
-		// }
-
 	  	for (var i = 0; i < wrongLettersArray.length; i++) {
 	  		if (wrongLettersArray[i] === currentLetterGuessed) {
 
@@ -176,6 +172,7 @@ function promptUserGuess() {
 	  	}
 
 	  	// console.log(currentLetterGuessed);
+
 	    // Check to see if the user enters a proper guess
 	    if (inquirerResponse.currGuess === "" || letterAlreadyGuessed) {
 	      console.log("\nSorry, please make a another guess");
@@ -202,7 +199,6 @@ function whatsNext(playerWon) {
 	if (playerWon) {
 
 		console.log("\n" + userName.bgCyan + " you WON! Congrats!\n".bgCyan);
-
 	} 
 	else {
 
@@ -236,23 +232,17 @@ function whatsNext(playerWon) {
 }
 
 function checkContinue() {
-// while (currentGuessCount <= totalGuessesAllowed) {
-	if (currentGuessCount <= totalGuessesAllowed) {
+
+	// check to see if current guesses are less than total allowed
+	if (currentGuessCount < totalGuessesAllowed) {
 
 		clearConsoleWindows();
-
-		// var isCorrect = currentWord.checkLetter(currentLetterGuessed);
-
-		// if (!isCorrect) {
-		// 	wrongLettersArray.push(currentLetterGuessed);
-		// }
 
 		console.log("\n\nWelcome " + userName.bold.magenta + "\n\n");
 		console.log("****   Let's play some hangman!   ****\n".rainbow);
 
 	    currentWord.showUserViewWord();
 	    showGuessedLetters();
-	    // var userGuess = promptUserGuess();
 	    
 	    // check to see if word already guessed
 	    if (currentWord.letterGuessedCount < currentWord.currentWord.length) {
@@ -262,14 +252,7 @@ function checkContinue() {
 	    	whatsNext(true);
 	    }
 
-	 	// var isCorrect = currentWord.checkLetter(currentLetterGuessed);
-
-		// if (!isCorrect) {
-		// 	wrongLettersArray.push(currentLetterGuessed);
-		// }
-
-	    // console.log(currentGuessCount);
-	    // currentGuessCount++;
+	 	// console.log(currentGuessCount);
 	} else {
 
 		whatsNext(false);

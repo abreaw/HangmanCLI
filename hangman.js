@@ -10,13 +10,6 @@
 // -----------------------------------------------------------------------------------
 
 
-// Known issues that need to be resolved 
-// -----------------------------------------------------------------------------------
-// input from user takes more than just a single character ... need to resolve this still
-// -----------------------------------------------------------------------------------
-
-
-
 // Load the NPM Package inquirer & fs
 var inquirer = require("inquirer");  // allow command line prompts to use
 var fs = require("fs");  // allow file reads for words to be used for the hangman game & writes for scores to be recorded (if we get that far)
@@ -149,10 +142,28 @@ function promptUserGuess() {
 	      name: "currGuess",
 	      validate: function(value) 
 	      	  {
-	            var pass = value.match(/[a-z]/i);
-	            if (pass) {
-	              return true;
+	      	  	// var pass = value.match(/[a-z]/i);
+	            var pass = value.match(/[a-z]{1}/i);
+	            // console.log(pass);
+	            // console.log("what is the letter checked", pass[0]);
+	            // console.log("what is the input", pass.input);
+
+	            // check return from match - pass variable (if null no match ... a letter was not entered)
+	            if (pass != null) {
+
+	              // checks to see if the input matches the single char checked are equal
+	              if (pass[0] === pass.input) {  
+	                
+	                // user input is valid
+	                return true;
+	              }
+	              else {
+	              	// user input is more than a single letter
+	              	console.log('  -- Please enter just one letter');
+	              }
 	            } else {
+
+	              // user input is not a letter
 		          console.log('  -- Please enter a valid letter');
 		        }
 	          }
@@ -291,12 +302,12 @@ function resetGame() {
 
 
 // -----------------------------------------------------------------------------------
-// clears the console view so the user only sees the game play happening
+// moves the console view so the user only sees the game play happening
 // -----------------------------------------------------------------------------------
 function clearConsoleWindows() {
 
 	if (process.platform === 'win32') {
-		console.log("\u001b[2J\u001b[0;5H");	
+		console.log("\u001b[2J\u001b[0;5H");  // moves the console to the 0,0 position (does not clear the history)
 	} else {
 		console.log("user not windows user");
 	}
